@@ -15,8 +15,18 @@ namespace DesafioFundamentos.Models
         public void AdicionarVeiculo()
         {
             // TODO: Pedir para o usuário digitar uma placa (ReadLine) e adicionar na lista "veiculos"
-            // *IMPLEMENTE AQUI*
+            // Implementado!
             Console.WriteLine("Digite a placa do veículo para estacionar:");
+            string placa = Console.ReadLine();
+            //Verificando e adicionando a funcionalidade se a placa é válida, e se sim, adicionando a lista. Para ser válida ela tem que ter 8 caracter
+            // e ser diferente de nulo.
+            if(placa.Length == 8 && placa!=null){
+              veiculos.Add(placa);  
+            }else{
+                Console.WriteLine("O valor de sua placa é inválido, Utilize o formato XYZ-1234");
+                return;
+            }
+            
         }
 
         public void RemoverVeiculo()
@@ -24,8 +34,9 @@ namespace DesafioFundamentos.Models
             Console.WriteLine("Digite a placa do veículo para remover:");
 
             // Pedir para o usuário digitar a placa e armazenar na variável placa
-            // *IMPLEMENTE AQUI*
-            string placa = "";
+            // Implementado!
+             string placa = Console.ReadLine();
+    
 
             // Verifica se o veículo existe
             if (veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
@@ -34,13 +45,15 @@ namespace DesafioFundamentos.Models
 
                 // TODO: Pedir para o usuário digitar a quantidade de horas que o veículo permaneceu estacionado,
                 // TODO: Realizar o seguinte cálculo: "precoInicial + precoPorHora * horas" para a variável valorTotal                
-                // *IMPLEMENTE AQUI*
-                int horas = 0;
+                // Implementado
+
+                int horas = Convert.ToInt32(Console.ReadLine()); // porque armazena strings, entao temos que transformar//
                 decimal valorTotal = 0; 
-
+                valorTotal = (precoInicial + precoPorHora) * horas;
+                
                 // TODO: Remover a placa digitada da lista de veículos
-                // *IMPLEMENTE AQUI*
-
+                // Implementado
+                veiculos.Remove(placa);
                 Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
             }
             else
