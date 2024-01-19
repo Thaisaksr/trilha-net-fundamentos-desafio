@@ -47,12 +47,12 @@ namespace DesafioFundamentos.Models
                 // TODO: Realizar o seguinte cálculo: "precoInicial + precoPorHora * horas" para a variável valorTotal                
                 // Implementado
 
-                int horas = Convert.ToInt32(Console.ReadLine()); // porque armazena strings, entao temos que transformar//
+                int horas = Convert.ToInt32(Console.ReadLine()); // porque funçao ReadLine armazena strings, entao temos que transformar em Int//
                 decimal valorTotal = 0; 
                 valorTotal = (precoInicial + precoPorHora) * horas;
                 
-                // TODO: Remover a placa digitada da lista de veículos
-                // Implementado
+                // Remove a placa digitada da lista de veículos
+                
                 veiculos.Remove(placa);
                 Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
             }
@@ -68,9 +68,13 @@ namespace DesafioFundamentos.Models
             if (veiculos.Any())
             {
                 Console.WriteLine("Os veículos estacionados são:");
-                // TODO: Realizar um laço de repetição, exibindo os veículos estacionados
-                // *IMPLEMENTE AQUI*
-            }
+                //Realiza um laço de repetição, exibindo os veículos estacionados
+                  for (int contador = 0; contador < veiculos.Count; contador++)
+                {
+                    Console.WriteLine($"Carro estacionado n° {contador + 1}: - {veiculos[contador]}");
+
+                }
+            }   
             else
             {
                 Console.WriteLine("Não há veículos estacionados.");
