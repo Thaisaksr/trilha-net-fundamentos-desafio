@@ -20,19 +20,15 @@ namespace DesafioFundamentos.Models
         get { return _precoPorHora; }
         private set { _precoPorHora = value; } 
     }
+    public Estacionamento(decimal _precoInicial, decimal _precoPorHora)
+{
+
+        PrecoInicial = _precoInicial;
+        PrecoPorHora = _precoPorHora;
     
-    public Estacionamento(decimal precoInicial, decimal precoPorHora)
-        {
-        if (precoInicial < 0)
-            throw new ArgumentException("O preço inicial não pode ser negativo.");
-
-        if (precoPorHora < 0)
-            throw new ArgumentException("O preço por hora não pode ser negativo.");
-
-    PrecoInicial = precoInicial;
-    PrecoPorHora = precoPorHora;
-        }
-    public void AdicionarVeiculo()
+}
+    
+       public void AdicionarVeiculo()
     {
         try
         {
