@@ -1,62 +1,77 @@
+
+using System.Text.RegularExpressions;
+
 namespace DesafioFundamentos.Models
 {
     public class Estacionamento
     {
-        private decimal precoInicial = 0;
-        private decimal precoPorHora = 0;
+        private decimal _precoInicial = 0;
+        private decimal _precoPorHora = 0;
         private List<string> veiculos = new List<string>();
+        
+          public decimal PrecoInicial
+    {
+        get { return _precoInicial; }
+        private set { _precoInicial = value; }
+    }
 
-        public Estacionamento(decimal precoInicial, decimal precoPorHora)
-        {
-            this.precoInicial = precoInicial;
-            this.precoPorHora = precoPorHora;
-        }
-
-        public void AdicionarVeiculo()
-        {
-            // TODO: Pedir para o usuário digitar uma placa (ReadLine) e adicionar na lista "veiculos"
-            // Implementado!
-            Console.WriteLine("Digite a placa do veículo para estacionar:");
-            string placa = Console.ReadLine();
-            //Verificando e adicionando a funcionalidade se a placa é válida, e se sim, adicionando a lista. Para ser válida ela tem que ter 8 caracter
-            // e ser diferente de nulo.
-            if(placa.Length == 8 && placa!=null){
-              veiculos.Add(placa);  
-            }else{
-                Console.WriteLine("O valor de sua placa é inválido, Utilize o formato XYZ-1234");
-                return;
-            }
-            
-        }
-
-        public void RemoverVeiculo()
-        {
-            Console.WriteLine("Digite a placa do veículo para remover:");
-
-            // Pedir para o usuário digitar a placa e armazenar na variável placa
-            // Implementado!
-             string placa = Console.ReadLine();
+         public decimal PrecoPorHora
+    {
+        get { return _precoPorHora; }
+        private set { _precoPorHora = value; } 
+    }
     
+    public Estacionamento(decimal precoInicial, decimal precoPorHora)
+        {
+        if (precoInicial < 0)
+            throw new ArgumentException("O preço inicial não pode ser negativo.");
 
-            // Verifica se o veículo existe
-            if (veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
+        if (precoPorHora < 0)
+            throw new ArgumentException("O preço por hora não pode ser negativo.");
+
+    PrecoInicial = precoInicial;
+    PrecoPorHora = precoPorHora;
+        }
+    public void AdicionarVeiculo()
+    {
+        try
+        {
+        Console.WriteLine("Digite a placa do veículo para estacionar:(no formato XYZ-1234)");
+        string placa = Console.ReadLine();
+       
+        if(placa.Length == 8 && Regex.IsMatch(placa, @"^[A-Za-z]{3}-\d{4}$"))
+        {
+                veiculos.Add(placa);
+                }
+        else {
+            throw new Exception ("Ocorreu um erro de Digitação");
+        }
+             
+        }
+          catch (Exception ex) 
+        {
+            Console.WriteLine(ex.Message+": O valor de sua placa é inválido, Utilize o formato XYZ-1234" );
+         }
+    }
+    public void RemoverVeiculo()
+        {
+        Console.WriteLine("Digite a placa do veículo para remover:");
+        string placa = Console.ReadLine();
+        
+        if (veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
             {
                 Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
 
-                // TODO: Pedir para o usuário digitar a quantidade de horas que o veículo permaneceu estacionado,
-                // TODO: Realizar o seguinte cálculo: "precoInicial + precoPorHora * horas" para a variável valorTotal                
-                // Implementado
-
-                int horas = Convert.ToInt32(Console.ReadLine()); // porque funçao ReadLine armazena strings, entao temos que transformar em Int//
+                int horas = Convert.ToInt32(Console.ReadLine()); 
                 decimal valorTotal = 0; 
-                valorTotal = (precoInicial + precoPorHora) * horas;
+                valorTotal = (PrecoInicial + PrecoPorHora) * horas;
                 
                 // Remove a placa digitada da lista de veículos
                 
                 veiculos.Remove(placa);
                 Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
             }
-            else
+        else
             {
                 Console.WriteLine("Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente");
             }
@@ -79,6 +94,7 @@ namespace DesafioFundamentos.Models
             {
                 Console.WriteLine("Não há veículos estacionados.");
             }
+    
         }
     }
-}
+}   
