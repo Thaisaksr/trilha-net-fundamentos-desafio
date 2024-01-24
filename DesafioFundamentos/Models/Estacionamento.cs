@@ -1,4 +1,5 @@
 
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
 namespace DesafioFundamentos.Models
@@ -33,8 +34,10 @@ namespace DesafioFundamentos.Models
         try
         {
         Console.WriteLine("Digite a placa do veículo para estacionar:(no formato XYZ-1234)");
-        string placa = Console.ReadLine();
        
+        string placa = Console.ReadLine();
+               placa = placa.ToUpper();
+
         if(placa.Length == 8 && Regex.IsMatch(placa, @"^[A-Za-z]{3}-\d{4}$"))
         {
                 veiculos.Add(placa);
