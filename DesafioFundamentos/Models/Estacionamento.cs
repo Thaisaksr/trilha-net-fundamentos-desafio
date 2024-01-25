@@ -52,6 +52,9 @@ namespace DesafioFundamentos.Models
             Console.WriteLine(ex.Message+": O valor de sua placa é inválido, Utilize o formato XYZ-1234" );
          }
     }
+
+     
+
     public void RemoverVeiculo()
         {
         Console.WriteLine("Digite a placa do veículo para remover:");
@@ -59,14 +62,11 @@ namespace DesafioFundamentos.Models
         
         if (veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
             {
-                Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
-
-                int horas = Convert.ToInt32(Console.ReadLine()); 
-                decimal valorTotal = 0; 
-                valorTotal = (PrecoInicial + PrecoPorHora) * horas;
-                
+        Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
+    
                 // Remove a placa digitada da lista de veículos
-                
+              
+                decimal valorTotal = ValorTotaldeHoras();              
                 veiculos.Remove(placa);
                 Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
             }
@@ -75,6 +75,16 @@ namespace DesafioFundamentos.Models
                 Console.WriteLine("Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente");
             }
         }
+
+        private decimal ValorTotaldeHoras() 
+        {
+
+        int horas = Convert.ToInt32(Console.ReadLine()); 
+        Decimal valorTotal = PrecoInicial +  (PrecoPorHora * horas);
+       return valorTotal;
+        }
+
+
 
         public void ListarVeiculos()
         {
